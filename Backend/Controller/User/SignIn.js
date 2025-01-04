@@ -25,7 +25,7 @@ const SignIn = async (req, res) => {
     // checking whether user exists or not
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
-      res.status(404).json({
+      return res.status(404).json({
         error: true,
         success: false,
         message: "User not found",
@@ -35,7 +35,7 @@ const SignIn = async (req, res) => {
     // password do not match
     const passwordMatch = await bcrypt.compare(password, existingUser.password);
     if (!passwordMatch) {
-      res.status(400).json({
+      return res.status(400).json({
         error: true,
         success: false,
         message: "Incorrect User or Password",
@@ -43,14 +43,18 @@ const SignIn = async (req, res) => {
     }
 
     generateToken(existingUser._id, res);
-    res.status(200).json({
+    return res.status(200).json({
       error: false,
       success: true,
       message: "User logged in successfully!",
-      user: existingUser,
+      user: {
+        _id:existingUser._id,
+        username:existingUser.username,
+        email:existingUser.email,
+      },
     });
   } catch (e) {
-    res.status(500).json({
+    return res.status(500).json({
       error: true,
       success: false,
       message: "Internal Server Error",

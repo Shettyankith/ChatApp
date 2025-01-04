@@ -20,14 +20,14 @@ function SignUp() {
     return value === password || "Password mismacthed!";
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const userInfo = {
       username: data.username,
       email: data.email,
       password: data.password,
       confirmPassword: data.confirmPassword,
     };
-    axios
+    await axios
       .post(summaryAPI.signup.url, userInfo,{
         headers: {
             "Content-Type": "application/json",

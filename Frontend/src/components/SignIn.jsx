@@ -9,18 +9,15 @@ function SignIn() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const userInfo = {
-      username: data.username,
       email: data.email,
       password: data.password,
-      confirmPassword: data.confirmPassword,
     };
-    axios
+    await axios
       .post("http://localhost:8080/user/signin", userInfo,{
         headers: {
             "Content-Type": "application/json",
