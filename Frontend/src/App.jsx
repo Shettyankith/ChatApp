@@ -3,14 +3,15 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 import Left from './home/left/Left'
 import Right from './home/right/Right'
-import Authentication from './components/Authentication'
+import SignIn from './components/SignIn'
+import SignUp from './components/SignUp'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <Authentication/>
+    <SignIn/>
       {/* <div className='flex h-screen'>
         <Left/>
         <Right/> 

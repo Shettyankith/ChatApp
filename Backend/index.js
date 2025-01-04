@@ -1,10 +1,15 @@
 import express from "express";
 import mongoose from "mongoose";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 import router from "./Router/index.js";
+import cors from "cors";
 const app=express();
 dotenv.config();
 app.use(express.json());
+app.use(cors({
+    origin:process.env.FRONTEND_URL,
+    credentials: true,
+}));
 
 app.get("/",(req,res)=>{
     res.send("Home page");

@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import summaryAPI from "../Routes";
+import axios from "axios";
 
-function Authentication() {
+function SignIn() {
   const [hidePassword, sethidePassword] = useState(false);
   const {
     register,
@@ -11,7 +13,42 @@ function Authentication() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const userInfo = {
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      confirmPassword: data.confirmPassword,
+    };
+    axios
+      .post("http://localhost:8080/user/signin", userInfo,{
+        headers: {
+            "Content-Type": "application/json",
+        },validateStatus: function (status) {
+          return status < 500;             // Resolve for all statuses below 500
+        },
+    })
+      .then((res) => {
+        if (res.data.success) {
+          console.log("Data saved successfully. Response from backend:");
+          console.log(res.data);
+          localStorage.setItem("token", JSON.stringify(res.data));
+        } else {
+          console.log("Error from backend:", res.data.message);
+        }
+      })
+      .catch((e) => { 
+        console.log("There was an error in the API request.");
+      if (error.response) {
+        // Backend errors
+        console.error("Response Error:", error.response.data.message);
+      } else {
+        // Network or client-side errors
+        console.error("Error Message:", error.message);
+      }
+      });
+  };
+
   return (
     <div className="flex justify-center items-center h-screen bg-[#1d1923]">
       <div className="left p-5 w-[30%] bg-[#1d232a] h-[70%] rounded-tl-xl rounded-bl-xl lg:flex justify-center items-center flex-col space-y-4">
@@ -23,7 +60,7 @@ function Authentication() {
           connections is just one step away
         </p>
 
-        <form className="space-y-4 mb-4 w-[80%]">
+        <form className="space-y-4 mb-4 w-[80%]" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full space-x-4 text-md border-0 border-b-[1px] p-2">
             <i class="fa-solid fa-envelope"></i>
             <input
@@ -31,19 +68,19 @@ function Authentication() {
               name="email"
               id="email"
               placeholder="Email"
-              className="bg-[#1d232a] outline-none"
+              className="bg-[#1d232a] outline-none  w-[78%]"
               {...register("email", { required: true })}
             />
           </div>
-          {errors.email && <span>This field is required</span>}
+          {errors.email && <span className="text-red-400">This field is required</span>}
           <div className="w-full space-x-4 text-md border-0 border-b-[1px] p-2">
             <i class="fa-solid fa-key"></i>
             <input
-              type={`{${hidePassword}?"password":"text"}`}
+              type={hidePassword ? "password" : "text"}
               name="password"
               id="password"
               placeholder="Password"
-              className="bg-[#1d232a] outline-none w-[]"
+              className="bg-[#1d232a] outline-none w-[78%]"
               {...register("password", { required: true })}
             />   
             <i
@@ -55,7 +92,7 @@ function Authentication() {
               }}
             ></i>
           </div>
-          {errors.password && <span>This field is required</span>}
+          {errors.password && <span className="text-red-400">This field is required</span>}
           <button type="submit" className="w-full bg-[#ad6af9]  font-bold py-2 rounded-lg hover:bg-[#1d232a] hover:text-[#ad6af9] border hover:border-2 transition-all duration-300 border-[#ad6af9]">
           Access Whirl
         </button>
@@ -82,4 +119,4 @@ function Authentication() {
   );
 }
 
-export default Authentication;
+export default SignIn;

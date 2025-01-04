@@ -51,6 +51,7 @@ const Signup = async (req, res) => {
     // checking whether user already exists or not
     const existingUser = await User.findOne({ email });
     if (existingUser) {
+      console.log("the user is already a member of whirl")
       return res.status(403).json({
         error: true,
         success: false,
@@ -67,9 +68,14 @@ const Signup = async (req, res) => {
       error: false,
       success: true,
       message: "User registered successfully",
-      user: newUser,
+      user: {
+        _id:newUser._id,
+        username:newUser.username,
+        email:newUser.email,
+      },
     });
   } catch (e) {
+    console.log(e.message)
     res.status(500).json({
       error: true,
       success: false,
