@@ -5,7 +5,9 @@ console.log(backendUrl)
 const summaryAPI=({
     signup:{
         url:`${backendUrl}/user/signup`,
-        method:"post",
+    },
+    signin:{
+        url:`${backendUrl}/user/signin`,
     },
 })
 

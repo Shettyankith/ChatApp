@@ -5,19 +5,20 @@ import Left from './home/left/Left'
 import Right from './home/right/Right'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
+import {AuthProvider} from "./context/AuthProvider"
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-    <SignIn/>
+    <AuthProvider>
+      <SignIn/>
       {/* <div className='flex h-screen'>
         <Left/>
         <Right/> 
         
       </div> */}
-    </>
+    </AuthProvider>
   )
 }
 

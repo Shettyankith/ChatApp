@@ -3,10 +3,18 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import summaryAPI from "../Routes";
+import { useAuth } from "../context/AuthProvider.jsx";
+
 
 function SignUp() {
+  // use context for gobal use 
+  const {currentUser,setcurrentUser}=useAuth();
+  // console.log("From AuthContext--->",currentUser)
+  // hide and see logic
   const [hidePassword, sethidePassword] = useState(false);
   const [hideconfirmPassword, sethideconfirmPassword] = useState(false);
+   
+  // Form validation using react hook form
   const {
     register,
     handleSubmit,
@@ -20,6 +28,7 @@ function SignUp() {
     return value === password || "Password mismacthed!";
   };
 
+  // API request
   const onSubmit = async (data) => {
     const userInfo = {
       username: data.username,
@@ -39,7 +48,10 @@ function SignUp() {
         if (res.data.success) {
           console.log("Data saved successfully. Response from backend:");
           console.log(res.data);
+          // set the local storage
           localStorage.setItem("token", JSON.stringify(res.data));
+          // store the user detail in context for golbal use
+          setcurrentUser(res.data);
         } else {
           console.log("Error from backend:", res.data.message);
         }

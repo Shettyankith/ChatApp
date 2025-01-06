@@ -3,8 +3,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import summaryAPI from "../Routes";
 import axios from "axios";
+import { useAuth } from "../context/AuthProvider.jsx";
 
 function SignIn() {
+  // use context for gobal use 
+    const {currentUser,setcurrentUser}=useAuth();
+  // form validation using react hook form
   const [hidePassword, sethidePassword] = useState(false);
   const {
     register,
@@ -12,13 +16,14 @@ function SignIn() {
     formState: { errors },
   } = useForm();
 
+  // API request
   const onSubmit = async (data) => {
     const userInfo = {
       email: data.email,
       password: data.password,
     };
     await axios
-      .post("http://localhost:8080/user/signin", userInfo,{
+      .post(summaryAPI.signin.url, userInfo,{
         headers: {
             "Content-Type": "application/json",
         },validateStatus: function (status) {
@@ -27,9 +32,13 @@ function SignIn() {
     })
       .then((res) => {
         if (res.data.success) {
-          console.log("Data saved successfully. Response from backend:");
+          console.log("logged in successfully. Response from backend:");
           console.log(res.data);
+          // set the local storage
           localStorage.setItem("token", JSON.stringify(res.data));
+           // store the user detail in context for golbal use
+          setcurrentUser(res.data);
+          // console.log("From Login AuthContext--->",currentUser)
         } else {
           console.log("Error from backend:", res.data.message);
         }
@@ -58,6 +67,7 @@ function SignIn() {
         </p>
 
         <form className="space-y-4 mb-4 w-[80%]" onSubmit={handleSubmit(onSubmit)}>
+          {/* Email */}
           <div className="w-full space-x-4 text-md border-0 border-b-[1px] p-2">
             <i class="fa-solid fa-envelope"></i>
             <input
@@ -70,6 +80,9 @@ function SignIn() {
             />
           </div>
           {errors.email && <span className="text-red-400">This field is required</span>}
+
+
+          {/*Password */}
           <div className="w-full space-x-4 text-md border-0 border-b-[1px] p-2">
             <i class="fa-solid fa-key"></i>
             <input
