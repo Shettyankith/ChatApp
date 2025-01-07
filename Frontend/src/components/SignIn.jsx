@@ -56,8 +56,8 @@ function SignIn() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-[#1d1923]">
-      <div className="left p-5 w-[30%] bg-[#1d232a] h-[70%] rounded-tl-xl rounded-bl-xl lg:flex justify-center items-center flex-col space-y-4">
+    <div className="flex lg:flex-row flex-col-reverse justify-center items-center h-[100vh] bg-[#1d1923] lg1:pt-[40px]">
+      <div className="left p-5 w-[80%] lg:w-[30%] bg-[#1d232a] h-[70%] rounded-tl-xl rounded-bl-xl lg:flex justify-center items-center flex-col space-y-4">
         <h3 className="text-5xl font-bold text-[#ad6af9] text-center">
           You're Back – Let's Chat 🫰
         </h3>
@@ -66,7 +66,7 @@ function SignIn() {
           connections is just one step away
         </p>
 
-        <form className="space-y-4 mb-4 w-[80%]" onSubmit={handleSubmit(onSubmit)}>
+        <form className="space-y-4 mb-4 w-[80%] lg:block flex flex-col justify-center items-center" onSubmit={handleSubmit(onSubmit)}>
           {/* Email */}
           <div className="w-full space-x-4 text-md border-0 border-b-[1px] p-2">
             <i class="fa-solid fa-envelope"></i>
@@ -110,11 +110,11 @@ function SignIn() {
         
         <a
           href="/forgot-password"
-          className="hover:underline hover:text-[#ad6af9]"
+          className="hover:underline hover:text-[#ad6af9] text-center block"
         >
           Forgot Password?
         </a>
-        <p>
+        <p className="text-center">
           Don't have an account?{" "}
           <a href="/signup">
             <span className="text-[#ad6af9] hover:underline">Sign up</span>{" "}
@@ -122,8 +122,8 @@ function SignIn() {
           </a>
         </p>
       </div>
-      <div className="right w-[30%] h-[70%] rounded-tr-xl rounded-br-xl bg-[#1d232a] flex justify-center items-center">
-        <img src="./login.png" alt="Login pic" />
+      <div className="right w-[80%] lg:w-[30%] h-[70%] rounded-tr-xl rounded-br-xl bg-[#1d232a] flex justify-center items-center ">
+        <img src="./login.png" alt="Login pic" className="h-[100%]"/>
       </div>
     </div>
   );
