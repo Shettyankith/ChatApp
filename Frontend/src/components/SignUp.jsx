@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import summaryAPI from "../Routes";
 import { useAuth } from "../context/AuthProvider.jsx";
+import {Link} from "react-router-dom"
 
 
 function SignUp() {
@@ -177,10 +178,10 @@ function SignUp() {
 
         <p>
           Already have an account?{" "}
-          <a href="/signup">
-            <span className="text-[#ad6af9] hover:underline text-center">Sign In</span>{" "}
+        
+            <Link to={"/signin"} className="text-[#ad6af9] hover:underline text-center">Sign In</Link>{" "}
             here!
-          </a>
+         
         </p>
       </div>
       <div className="right w-[90%] lg:w-[30%] h-fit lg:h-[80%] rounded-tr-xl rounded-br-xl bg-[#1d232a] flex justify-center items-center">
