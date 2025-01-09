@@ -1,5 +1,6 @@
 const SignOut=async(requestAnimationFrame,res)=>{
     try{
+        console.log("control reached here")
         res.clearCookie("token");
         res.status(200).json({
             error:false,

@@ -7,10 +7,12 @@ import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import { useAuth } from "./context/AuthProvider";
 import {Routes,Route, Navigate} from "react-router-dom"
+import {GetAllUsers} from "./context/GetAllUsers"
 
 function App() {
-  const {currentUser,setcurrentUser}=useAuth();
-  console.log("From App---->",currentUser)
+  const { currentUser, setcurrentUser } = useAuth();
+  const { loading, allUsers } = GetAllUsers();
+  console.log(allUsers)
 
   return (
     <>

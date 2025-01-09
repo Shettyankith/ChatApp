@@ -9,6 +9,10 @@ const summaryAPI=({
     signin:{
         url:`${backendUrl}/user/signin`,
     },
+    getAllUsers:{
+        url:`${backendUrl}/user/alluser`,
+    },
 })
 
 export default summaryAPI;
+

@@ -38,7 +38,7 @@ function SignUp() {
       confirmPassword: data.confirmPassword,
     };
     await axios
-      .post(summaryAPI.signup.url, userInfo,{
+      .post("/api/user/signup", userInfo,{
         headers: {
             "Content-Type": "application/json",
         },validateStatus: function (status) {

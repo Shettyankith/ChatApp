@@ -24,7 +24,7 @@ function SignIn() {
       password: data.password,
     };
     await axios
-      .post(summaryAPI.signin.url, userInfo, {
+      .post("/api/user/signin", userInfo, {
         headers: {
           "Content-Type": "application/json",
         },
