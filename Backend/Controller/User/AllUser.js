@@ -4,6 +4,7 @@ const AllUser=async(req,res)=>{
     try{
         // get loggedinuserID
         const loggedUser=req.user._id;
+        console.log(loggedUser);
         // except loggedin user get all other users in database
         const allUserDetails=await User.find({_id:{$ne:loggedUser}}).select("-password");
         return res.status(201).json({

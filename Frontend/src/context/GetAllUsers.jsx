@@ -11,7 +11,7 @@ export const GetAllUsers = () => {
     const getUsers = async () => {
       try {
         const token = Cookies.get("token");
-        const response = await axios.get(summaryAPI.getAllUsers.url, {
+        const response = await axios.get("/api/user/alluser", {
           Credentials: "included",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -21,8 +21,7 @@ export const GetAllUsers = () => {
           },
         });
 
-        console.log("From API response", response.data);
-        setAllUsers(response.data);
+        setAllUsers(response.data.data);
         setLoading(false);
       } catch (e) {
         console.error("Error fetching users:", e);

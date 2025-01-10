@@ -9,13 +9,10 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieParser())   //to parse the cookie
 app.use(cors({
-    origin:process.env.FRONTEND_URL,
+    // origin:process.env.FRONTEND_URL,
     credentials: true,
 }));
 
-app.get("/",(req,res)=>{
-    res.send("Home page");
-});
 
 // DB setup
 try{
