@@ -8,6 +8,7 @@ import SignUp from "./components/SignUp";
 import { useAuth } from "./context/AuthProvider";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { GetAllUsers } from "./context/GetAllUsers";
+import axios from "axios";
 
 function App() {
   const { currentUser, setcurrentUser } = useAuth();

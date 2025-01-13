@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import router from "./Router/index.js";
+import userRouter from "./Router/userRouter.js";
+import messageRouter from "./Router/messageRouter.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 const app=express();
@@ -22,7 +23,8 @@ try{
     console.log("Database connection error",e);
 }
 
-app.use("/api/user",router);
+app.use("/api/user",userRouter);
+app.use("/api/message",messageRouter);
 
 app.get("/",(req,res)=>{
     res.send("Hello world");

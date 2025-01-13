@@ -5,8 +5,6 @@ const decryptToken=async(req,res,next)=>{
     try{
         // Access the token
         const token=req.cookies.token||null;
-        console.log("control reached here")
-        console.log(token);
         if(!token){
             return res.status(401).json({
                 error:true,

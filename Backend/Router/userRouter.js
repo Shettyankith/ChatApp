@@ -5,11 +5,11 @@ import SignOut from "../Controller/User/SignOut.js";
 import AllUser from "../Controller/User/AllUser.js"
 import decryptToken from "../Middleware/decryptToken.js"
 
-const router=express.Router();
+const userRouter=express.Router();
 
-router.post("/signup",Signup);
-router.post("/signin",SignIn);
-router.get("/signout",SignOut);
-router.get("/alluser",decryptToken,AllUser);
+userRouter.post("/signup",Signup);
+userRouter.post("/signin",SignIn);
+userRouter.get("/signout",SignOut);
+userRouter.get("/alluser",decryptToken,AllUser);
 
-export default router; 
+export default userRouter; 
