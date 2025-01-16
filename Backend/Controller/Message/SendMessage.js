@@ -50,20 +50,6 @@ const SendMessage=async(req,res)=>{
             message:"message sent successfully",
             data:conversation,
         });
-        // If the conversation already exists
-        const newMessage2=new Message({ 
-            sender:senderId,
-            receiver:receiverId,
-            message,
-        });     
-        conversation.messages.push(newMessage._id);
-        await conversation.save();
-        return res.status(201).json({
-            success:true,
-            error:false,
-            message:"message sent successfully",
-            data:conversation,
-        });
     }catch(e){
         console.log("From SendMessage file",e);
         return res.status(500).json({

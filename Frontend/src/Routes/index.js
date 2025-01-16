@@ -10,6 +10,9 @@ const summaryAPI=({
     getAllUsers:{
         url:`${backendUrl}/user/alluser`,
     },
+    getMessage:{
+        url:`${backendUrl}/message/get/`,
+    },
 })
 
 export default summaryAPI;

@@ -28,6 +28,7 @@ function SignIn() {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
         validateStatus: function (status) {
           return status < 500; // Resolve for all statuses below 500
         },

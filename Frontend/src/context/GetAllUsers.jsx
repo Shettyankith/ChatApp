@@ -20,9 +20,13 @@ export const GetAllUsers = () => {
             return status < 500;
           },
         });
-
         setAllUsers(response.data.data);
-        setLoading(false);
+        if(allUsers===undefined||!allUsers){
+          setLoading(true);
+        }else{
+          setLoading(false);
+        }
+       
       } catch (e) {
         console.error("Error fetching users:", e);
         setLoading(false);

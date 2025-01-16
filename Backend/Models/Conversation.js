@@ -4,13 +4,13 @@ const conversationSchema=mongoose.Schema({
     participants:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:"User",
+            ref:"user",
         },
     ],
     messages:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:"Message",
+            ref:"message",
             default:[],
         }
     ]
