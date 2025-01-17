@@ -12,7 +12,7 @@ function Left() {
       if (response.data.success) {
         localStorage.removeItem("token");
         Cookies.remove("token");
-        console.log(response.data.message);
+        console.log(response.data);
       }
     } catch (e) {
       console.log("Left",e);

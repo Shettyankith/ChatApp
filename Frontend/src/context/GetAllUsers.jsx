@@ -12,10 +12,6 @@ export const GetAllUsers = () => {
       try {
         const token = Cookies.get("token");
         const response = await axios.get("/api/user/alluser", {
-          Credentials: "included",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
           validateStatus: function (status) {
             return status < 500;
           },

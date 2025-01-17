@@ -6,6 +6,7 @@ const decryptToken=async(req,res,next)=>{
         // Access the token
         const token=req.cookies.token||null;
         if(!token){
+            console.log("Cannot get the token");
             return res.status(401).json({
                 error:true,
                 success:false,
@@ -31,6 +32,7 @@ const decryptToken=async(req,res,next)=>{
             })
         }
         req.user=user;
+        console.log("Auth passed!");
         next();
     }catch(e){
         res.status(500).json({

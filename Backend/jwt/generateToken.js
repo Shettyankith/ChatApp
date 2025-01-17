@@ -8,9 +8,10 @@ const generateToken=(userId,res)=>{
 
     // Set the cookie
     res.cookie("token",token,{
-        httpOnly:true,
-        secure:true,
-        sameSite:"strict"
+        httpOnly:false,
+        secure:false,
+        sameSite:"lax",
+        path:"/",
     });
 };
 
