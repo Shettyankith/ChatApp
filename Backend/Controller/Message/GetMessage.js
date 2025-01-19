@@ -30,6 +30,14 @@ const GetMessage=async(req,res)=>{
             message:"All messages fetched!",
             data:conversation
         }); 
+        console.log("4")
+        console.log(conversation);
+        return res.status(201).json({
+            error:true,
+            success:false,
+            message:"All messages fetched!",
+            data:conversation
+        }); 
     }catch(e){
         console.log(e);
         return res.status(500).json({
