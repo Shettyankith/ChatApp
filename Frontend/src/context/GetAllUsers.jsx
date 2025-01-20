@@ -10,7 +10,6 @@ export const GetAllUsers = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const token = Cookies.get("token");
         const response = await axios.get("/api/user/alluser", {
           validateStatus: function (status) {
             return status < 500;

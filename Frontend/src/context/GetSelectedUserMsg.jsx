@@ -13,18 +13,16 @@ function GetSelectedUserMsg() {
       if (selectedUser && selectedUser._id) {
         try {
           setloading(true);
-          console.log("Sending the api request");
-          const token = Cookies.get("token");
-          console.log(token);
           const response = await axios.get(
-            `http://localhost:8080/api/message/get/${selectedUser._id}`,
+            `/api/message/get/${selectedUser._id}`,
             {
               
     validateStatus: (status) => status < 500,
             }
           );
-          console.log("response from getmessage", response.data);
-          setmessages(response.data);
+          // console.log("response from getmessage", response.data.data.messages);
+          // set the message array
+          setmessages(response.data.data.messages);
           setloading(false);
         } catch (e) {
           console.log("Some error in fetching the selected user message", e);
