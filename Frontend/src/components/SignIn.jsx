@@ -59,7 +59,7 @@ function SignIn() {
   };
 
   return (
-    <div className="flex lg:flex-row flex-col-reverse justify-center items-center min-h-screen bg-[#1d1923] py-10">
+    <div className="flex lg:flex-row flex-col-reverse justify-center items-center min-h-screen bg-[#1d1923] py-10 text-white">
       <div className="left p-5 w-[80%] lg:w-[30%] bg-[#1d232a] h-[70%] rounded-tl-xl rounded-bl-xl lg:flex justify-center items-center flex-col space-y-4">
         <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#ad6af9] text-center">
           You're Back – Let's Chat 🫰

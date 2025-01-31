@@ -1,11 +1,11 @@
 import React from "react";
 
-function Messages() {
+function Messages({message}) {
   return (
     <div className="my-2">
       <div className="chat chat-end">
         <div className="chat-bubble chat-bubble-success">
-          You have been given a great honor. 
+          {message.message}
         </div>
       </div>
       <div className="chat chat-start">

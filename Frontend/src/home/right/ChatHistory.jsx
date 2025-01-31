@@ -7,10 +7,16 @@ function ChatHistory() {
   if(!loading){
     console.log("Conversation details",messages)
   }
-  
   return (
     <div className='min-h-[78vh] overflow-y-auto scroller'>
-        <Messages/>
+      {
+        loading?(<p>Loading</p>):
+          messages.length>0?(
+            messages.map((message)=>{
+              return <Messages key={message._id} message={message}/>
+            })
+          ):(<p>start a conversation now</p>)
+      }
     </div>
   )
 }

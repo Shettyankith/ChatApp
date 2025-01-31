@@ -32,7 +32,6 @@ const decryptToken=async(req,res,next)=>{
             })
         }
         req.user=user;
-        console.log("Auth passed!");
         next();
     }catch(e){
         res.status(500).json({
