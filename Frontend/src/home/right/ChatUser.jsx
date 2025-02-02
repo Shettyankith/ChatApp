@@ -1,6 +1,8 @@
 import React from "react";
+import chatUser from '../../Zustand/index.js'
 
 function ChatUser() {
+  const { selectedUser } = chatUser();
   return (
     <>
       <div>
@@ -11,7 +13,7 @@ function ChatUser() {
             </div>
           </div>
           <div>
-            <h6 className="font-medium text-xl">Ashwija N</h6>
+            <h6 className="font-medium text-xl">{selectedUser?.username}</h6>
             <p className="font-medium">Online</p>
           </div>
         </div>

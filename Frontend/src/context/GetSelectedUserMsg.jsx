@@ -23,7 +23,7 @@ function GetSelectedUserMsg() {
           // console.log("response from getmessage", response.data.data.messages);
           // set the message array
           setmessages(response.data.data.messages);
-          // setloading(false);
+          setloading(false);
         } catch (e) {
           console.log("Some error in fetching the selected user message", e);
         }

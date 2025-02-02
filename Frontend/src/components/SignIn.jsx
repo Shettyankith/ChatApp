@@ -81,7 +81,7 @@ function SignIn() {
               name="email"
               id="email"
               placeholder="Email"
-              className="bg-[#1d232a] outline-none  w-[78%]"
+              className="bg-[#1d232a] outline-none  w-[78%] bg-[transparent]"
               {...register("email", { required: true })}
             />
           </div>

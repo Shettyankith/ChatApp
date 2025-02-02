@@ -46,7 +46,7 @@ function ChatHistory() {
               return <Messages key={message._id} message={message} />
             })
           ) : (<div className='flex flex-col justify-center items-center h-[80vh]'>
-            <img src="./startConversation.png" alt="image" className='md:w-[80%] w-[95%] lg:w-[40%] h-[50%] object-fit' />
+            <img src="./start2.png" alt="image" className='md:w-[80%] w-[95%] lg:w-[40%] h-[70%] object-fit' />
             <p className='font-medium lg:text-2xl text-xl p-2 text-center'>Looks like a quiet space! <span className='text-[#ad6af9] font-bold'>Break</span> the silence with a message!</p>
           </div>)
       }
