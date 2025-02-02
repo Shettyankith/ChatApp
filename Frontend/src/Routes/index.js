@@ -13,6 +13,9 @@ const summaryAPI=({
     getMessage:{
         url:`${backendUrl}/message/get/`,
     },
+    sendMessage:{
+        url:`${backendUrl}/message/send/`,
+    },
 })
 
 export default summaryAPI;

@@ -15,7 +15,7 @@ function Right() {
       ):(
         <div className='h-full flex flex-col object-cover justify-center items-center'>
           <img src="./second.png" alt="image" className='w-[40%] h-[50%]'/>
-          <p className='font-medium text-lg md:text-2xl italic'>Every great connection begins with a simple <span className='text-[#ad6af9] font-bold'>hello</span>. Send your message now!</p>
+          <p className='font-medium text-lg md:text-2xl italic text-center'>Every great connection begins with a simple <span className='text-[#ad6af9] font-bold'>hello</span>. Send your message now!</p>
         </div>
       )}
       

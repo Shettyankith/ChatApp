@@ -24,15 +24,15 @@ const SendMessage=async(req,res)=>{
             // save and push the message into conversation
             if(newMessage){
                 newConversation.messages.push(newMessage._id);
-                console.log("The conversation created is-->",newConversation);
             }
             await Promise.all([newMessage.save(),newConversation.save()]);
+            const populatedConversation = await newConversation.populate("messages");
             // send response
             return res.status(201).json({
                 success:true,
                 error:false,
                 message:"message sent successfully",
-                data:newConversation,
+                data:populatedConversation,
             });
         }
 
@@ -42,13 +42,16 @@ const SendMessage=async(req,res)=>{
             receiver:receiverId,
             message,
         });     
+        await newMessage.save();
         conversation.messages.push(newMessage._id);
         await conversation.save();
+        const updatedConversation = await Conversation.findById(conversation._id).populate("messages");
+        console.log(updatedConversation);
         return res.status(201).json({
             success:true,
             error:false,
             message:"message sent successfully",
-            data:conversation,
+            data:updatedConversation,
         });
     }catch(e){
         console.log("From SendMessage file",e);
