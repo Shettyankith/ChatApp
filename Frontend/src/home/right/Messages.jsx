@@ -7,7 +7,7 @@ function Messages({message}) {
   return (
     <div className="my-2">
       <div className={`chat  ${isMe?'chat-end':'chat-start'}`}>
-        <div className={`chat-bubble  ${isMe?'chat-bubble-success':'chat-bubble-primary'}`}>
+        <div className={`chat-bubble  ${isMe?'chat-bubble-accent':'chat-bubble-primary'}`}>
           {message.message}
         </div>
       </div>

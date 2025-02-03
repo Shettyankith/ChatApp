@@ -5,13 +5,14 @@ import userRouter from "./Router/userRouter.js";
 import messageRouter from "./Router/messageRouter.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-const app=express();
+import {app,server} from "./socket/server.js"
+
+// const app=express();
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser())   //to parse the cookie
 app.use(cors({
-    // origin:process.env.FRONTEND_URL,
-    
+    origin:process.env.FRONTEND_URL,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -35,6 +36,6 @@ app.get("/",(req,res)=>{
     res.send("Hello world");
 })
 
-app.listen(process.env.PORT,()=>{
+server.listen(process.env.PORT,()=>{
     console.log(`App is listening at port ${process.env.PORT}`);
 });

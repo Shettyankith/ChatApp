@@ -12,6 +12,7 @@ import axios from "axios";
 
 function App() {
   const { currentUser, setcurrentUser } = useAuth();
+  console.log("LoggedIn user is-->",currentUser)
   const { loading, allUsers } = GetAllUsers();
 
   return (
