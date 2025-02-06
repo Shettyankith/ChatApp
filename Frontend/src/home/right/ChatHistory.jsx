@@ -1,12 +1,15 @@
 import React from 'react'
 import Messages from './Messages'
 import GetSelectedUserMsg from '../../context/GetSelectedUserMsg'
+import GetSocketMessage from '../../context/GetSocketMessage';
 
 function ChatHistory() {
   const { messages, loading } = GetSelectedUserMsg();
   if (!loading) {
     console.log("Conversation details", messages)
   }
+  // calling to fetch real time messages
+  GetSocketMessage();
   return (
     <div className='min-h-[78vh] overflow-y-auto scroller'>
       {

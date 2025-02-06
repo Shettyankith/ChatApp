@@ -43,4 +43,9 @@ io.on("connection", (socket) => {
 
 });
 
+// real time message code
+export const getRecieverSocketId=(recieverId)=>{
+    return users[recieverId];
+}
+
 export { io, app, server };
