@@ -7,7 +7,7 @@ import chatUser from '../../Zustand/index.js'
 function Right() {
   const {selectedUser}=chatUser();
   return (
-    <div className='bg-[#1D1923] w-[70%] text-white'>
+    <div className='bg-[#1D1923] w-[70%] text-white '>
       {selectedUser?(
         <><ChatUser/>
         <ChatHistory/>

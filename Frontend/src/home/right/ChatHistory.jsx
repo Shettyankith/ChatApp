@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Messages from './Messages'
 import GetSelectedUserMsg from '../../context/GetSelectedUserMsg'
-import GetSocketMessage from '../../context/GetSocketMessage';
+import useGetSocketMessages from '../../context/GetSocketMessage';
 
 function ChatHistory() {
   const { messages, loading } = GetSelectedUserMsg();
   if (!loading) {
-    console.log("Conversation details", messages)
+    console.log("Conversation details", messages);
   }
   // calling to fetch real time messages
-  GetSocketMessage();
+  useGetSocketMessages();
   return (
-    <div className='min-h-[78vh] overflow-y-auto scroller'>
+    <div className=' flex flex-col overflow-y-auto lg:min-h-[82vh] max-h-[75vh] '>
       {
         loading ? (<div className='overflow-y-auto h-full'>
           <div className="chat chat-end my-4 ">
@@ -48,7 +48,8 @@ function ChatHistory() {
             messages?.map((message) => {
               return <Messages key={message._id} message={message} />
             })
-          ) : (<div className='flex flex-col justify-center items-center h-[80vh]'>
+          ) : 
+          (<div className='flex flex-col justify-center items-center h-[80vh]'>
             <img src="./start2.png" alt="image" className='md:w-[80%] w-[95%] lg:w-[40%] h-[70%] object-fit' />
             <p className='font-medium lg:text-2xl text-xl p-2 text-center italic'>Looks like a quiet space! <span className='text-[#ad6af9] font-bold'>Break</span> the silence with a message!</p>
           </div>)

@@ -35,8 +35,6 @@ function SignIn() {
       })
       .then((res) => {
         if (res.data.success) {
-          console.log("logged in successfully. Response from backend:");
-          console.log(res.data);
           // set the local storage
           localStorage.setItem("token", JSON.stringify(res.data));
           // store the user detail in context for golbal use

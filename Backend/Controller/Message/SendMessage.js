@@ -55,6 +55,7 @@ const SendMessage=async(req,res)=>{
         await conversation.save();
          // real time screen update of messages
         if(receiverSocketId){
+            console.log("message emitted from socket is",newMessage)
             io.to(receiverSocketId).emit("newMessage",newMessage)
         }
         const updatedConversation = await Conversation.findById(conversation._id).populate("messages");
