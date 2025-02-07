@@ -28,7 +28,7 @@ const SignIn = async (req, res) => {
       return res.status(404).json({
         error: true,
         success: false,
-        message: "User not found",
+        message: "Hmm… We don’t recognize that email. Sure it's you? 🤔",
       });
     }
 
@@ -38,7 +38,7 @@ const SignIn = async (req, res) => {
       return res.status(400).json({
         error: true,
         success: false,
-        message: "Incorrect User or Password",
+        message: "Invalid credentials! Maybe your keyboard was playing tricks? 🎭",
       });
     }
 

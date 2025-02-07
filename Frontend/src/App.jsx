@@ -9,6 +9,9 @@ import { useAuth } from "./context/AuthProvider";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { GetAllUsers } from "./context/GetAllUsers";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const { currentUser, setcurrentUser } = useAuth();
@@ -17,8 +20,10 @@ function App() {
 
   return (
     <>
+    <ToastContainer position="top-right" autoClose={3000} theme="dark"/>
+       
       <Routes>
-        <Route
+       <Route
           path="/"
           element={
             currentUser ? (

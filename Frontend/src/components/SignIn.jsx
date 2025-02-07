@@ -5,6 +5,7 @@ import summaryAPI from "../Routes";
 import axios from "axios";
 import { useAuth } from "../context/AuthProvider.jsx";
 import {Link} from "react-router-dom"
+import {toast} from "react-toastify"
 
 function SignIn() {
   // use context for gobal use
@@ -39,19 +40,19 @@ function SignIn() {
           localStorage.setItem("token", JSON.stringify(res.data));
           // store the user detail in context for golbal use
           setcurrentUser(res.data);
-          // console.log("From Login AuthContext--->",currentUser)
+          toast.success("Hey there! We missed you. 🥰");
         } else {
-          console.log("Error from backend:", res.data.message);
+          toast.error(res.data.message);
         }
       })
       .catch((e) => {
         console.log("There was an error in the API request.");
         if (error.response) {
           // Backend errors
-          console.error("Response Error:", error.response.data.message);
+          toast.error("Oops! Something went wrong. Maybe the server tripped over? 🤖");
         } else {
           // Network or client-side errors
-          console.error("Error Message:", error.message);
+          toast.error("Login failed! Try again or bribe the system with a cookie. 🍪");
         }
       });
   };

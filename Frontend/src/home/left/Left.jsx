@@ -3,21 +3,29 @@ import Search from "./Search";
 import User from "./User";
 import axios from "axios";
 import Cookies from "js-cookie";
+import {toast} from "react-toastify"
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthProvider";
 
 function Left() {
+  const { setcurrentUser } = useAuth();
   // Logout function
+  const navigate = useNavigate(); // ✅ Use the hook inside the component
+
   const logout = async () => {
     try {
       const response = await axios.get("/api/user/signout");
       if (response.data.success) {
         localStorage.removeItem("token");
         Cookies.remove("token");
-        console.log(response.data);
+        toast.success("Hope to see you soon👋");
+        setcurrentUser();
       }
     } catch (e) {
-      console.log("Left",e);
+      toast.error("Oops! Logout failed. Maybe try again after a coffee? ☕");
     }
   };
+
   return (
     <div className="w-[30%] bg-[#1D1923] text-white shrink-0">
       <div className="flex px-10 py-2 space-x-4 w-[100%]">

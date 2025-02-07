@@ -5,6 +5,7 @@ import axios from "axios";
 import summaryAPI from "../Routes";
 import { useAuth } from "../context/AuthProvider.jsx";
 import {Link} from "react-router-dom"
+import {toast} from "react-toastify"
 
 
 function SignUp() {
@@ -26,7 +27,7 @@ function SignUp() {
   const password = watch("password", " ");
   const confirmPassword = watch("confirmPassword", " ");
   const passwordMatch = (value) => {
-    return value === password || "Password mismacthed!";
+    return value === password || "Passwords don’t match! Looks like they’re playing hide and seek. 🫣";
   };
 
   // API request
@@ -47,24 +48,22 @@ function SignUp() {
     })
       .then((res) => {
         if (res.data.success) {
-          console.log("Data saved successfully. Response from backend:");
-          console.log(res.data);
           // set the local storage
           localStorage.setItem("token", JSON.stringify(res.data));
           // store the user detail in context for golbal use
           setcurrentUser(res.data);
+          toast.success("You're officially part of the squad!🤝")
         } else {
-          console.log("Error from backend:", res.data.message);
+          toast.error(res.data.message);
         }
       })
       .catch((e) => { 
-        console.log("There was an error in the API request.");
       if (error.response) {
         // Backend errors
-        console.error("Response Error:", error.response.data.message);
+        toast.error("Oops! Something went wrong. Maybe the server tripped over? 🤖");
       } else {
         // Network or client-side errors
-        console.error("Error Message:", error.message);
+        toast.error("Signup failed. Did you fill in everything correctly? 🤨");
       }
       });
   };

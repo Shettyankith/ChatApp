@@ -51,7 +51,7 @@ const Signup = async (req, res) => {
     // checking whether user already exists or not
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      console.log("the user is already a member of whirl")
+      console.log("That email is already taken. Maybe by your evil twin? 🧑‍🤝‍🧑")
       return res.status(403).json({
         error: true,
         success: false,
