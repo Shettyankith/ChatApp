@@ -34,7 +34,7 @@ const SendMessage=async(req,res)=>{
             if(receiverSocketId){
                 io.to(receiverSocketId).emit("newMessage",newMessage);
             }
-            const populatedConversation = await newConversation.populate("messages");
+            const populatedConversation = await newConversation.populate("messages").execPopulate();
             // send response
             return res.status(201).json({
                 success:true,
@@ -58,13 +58,13 @@ const SendMessage=async(req,res)=>{
             console.log("message emitted from socket is",newMessage)
             io.to(receiverSocketId).emit("newMessage",newMessage)
         }
-        const updatedConversation = await Conversation.findById(conversation._id).populate("messages");
+        // const populatedConversation = await Conversation.findById(newConversation._id).populate("messages");
         // console.log(updatedConversation);
         return res.status(201).json({
             success:true,
             error:false,
             message:"message sent successfully",
-            data:updatedConversation,
+            data:newMessage,
         });
     }catch(e){
         console.log("From SendMessage file",e);
