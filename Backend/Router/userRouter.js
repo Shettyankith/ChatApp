@@ -11,5 +11,6 @@ userRouter.post("/signup",Signup);
 userRouter.post("/signin",SignIn);
 userRouter.get("/signout",SignOut);
 userRouter.get("/alluser",decryptToken,AllUser);
+userRouter.post("/updateProfile",decryptToken,AllUser);
 
 export default userRouter; 

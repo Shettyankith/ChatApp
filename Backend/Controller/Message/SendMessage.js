@@ -34,7 +34,7 @@ const SendMessage=async(req,res)=>{
             if(receiverSocketId){
                 io.to(receiverSocketId).emit("newMessage",newMessage);
             }
-            const populatedConversation = await newConversation.populate("messages").execPopulate();
+            const populatedConversation = await newConversation.populate("messages");
             // send response
             return res.status(201).json({
                 success:true,

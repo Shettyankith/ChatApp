@@ -23,6 +23,7 @@ function SendMsg() {
 
         // Ensure messages update correctly
         setmessages([...messages, response.data.data]);
+        // setmessages((prevMessages) => [...(prevMessages || []), response.data.data]);
 
         setloading(false);
       } catch (e) {
