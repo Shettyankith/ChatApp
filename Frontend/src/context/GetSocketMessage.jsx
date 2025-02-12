@@ -8,12 +8,10 @@ function useGetSocketMessages() {
 
   useEffect(() => {
     const handleNewMessage = (newMessage) => {
-      console.log("New message received:", newMessage);
+      // console.log("New message received:", newMessage);
 
       // Functional update to prevent stale state issues
-      setmessages((prevMessages) => [...prevMessages, newMessage]);
-
-      console.log("After updating message array", messages);
+      setmessages(newMessage);
     };
 
     socket.on("newMessage", handleNewMessage);
@@ -22,6 +20,10 @@ function useGetSocketMessages() {
       socket.off("newMessage", handleNewMessage);
     };
   }, [socket, setmessages]);
+
+  // useEffect(()=>{
+  //   console.log("After updating message array", messages);
+  // },[messages])
 
   return { messages }; // Return messages if needed
 }

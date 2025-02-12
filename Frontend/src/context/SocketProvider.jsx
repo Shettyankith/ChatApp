@@ -23,7 +23,7 @@ export const SocketProvider=({children})=>{
             setsocket(socket);
             socket.on("getOnline",(users)=>{
                 setonlineUsers(users);
-                console.log("Socket disconnected from getOnline");
+                // console.log("Socket disconnected from getOnline");
             });
             return ()=>socket.close();
         }
