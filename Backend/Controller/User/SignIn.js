@@ -51,6 +51,8 @@ const SignIn = async (req, res) => {
         _id:existingUser._id,
         username:existingUser.username,
         email:existingUser.email,
+        profilePic:existingUser.profilePic,
+        bio:existingUser.bio,
       },
     });
   } catch (e) {

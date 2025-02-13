@@ -49,9 +49,9 @@ function SignUp() {
       .then((res) => {
         if (res.data.success) {
           // set the local storage
-          localStorage.setItem("token", JSON.stringify(res.data));
+          localStorage.setItem("token", JSON.stringify(res.data.user));
           // store the user detail in context for golbal use
-          setcurrentUser(res.data);
+          setcurrentUser(res.data.user);
           toast.success("You're officially part of the squad!🤝")
         } else {
           toast.error(res.data.message);
@@ -69,7 +69,7 @@ function SignUp() {
   };
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row justify-center items-center h-screen bg-[#1d1923]">
+    <div className="flex flex-col-reverse lg:flex-row justify-center items-center h-screen bg-[#1d1923] text-white">
       <div className="left p-5 w-[90%] lg:w-[40%] bg-[#1d232a] h-[80%] ropunded-tr-xl lg:rounded-tl-xl lg:rounded-bl-xl lg:flex justify-center items-center flex-col space-y-4">
         <h3 className="text-3xl  lg:text-5xl font-bold text-[#ad6af9] text-center leading-snug">
           Connect, Chat, and Collaborate
@@ -96,7 +96,7 @@ function SignUp() {
             />
           </div>
           {errors.username && (
-            <span className="text-red-400">This field is required</span>
+            <span className="text-red-400">⚠ This field is required</span>
           )}
 
           {/* Email */}
@@ -112,7 +112,7 @@ function SignUp() {
             />
           </div>
           {errors.email && (
-            <span className="text-red-400">This field is required</span>
+            <span className="text-red-400">⚠ This field is required</span>
           )}
 
           {/* Password */}
@@ -134,7 +134,7 @@ function SignUp() {
             ></i>
           </div>
           {errors.password && (
-            <span className="text-red-400">This field is required</span>
+            <span className="text-red-400">⚠ This field is required</span>
           )}
 
           {/* Confirm Password */}
@@ -162,7 +162,7 @@ function SignUp() {
           </div>
           {errors.confirmPassword && (
             <span className="text-red-400">
-             {errors.confirmPassword.message ? errors.confirmPassword.message : "This field is required"}
+             {errors.confirmPassword.message ? errors.confirmPassword.message : "⚠ This field is required"}
             </span>
           )}
 

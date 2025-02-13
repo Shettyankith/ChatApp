@@ -72,6 +72,8 @@ const Signup = async (req, res) => {
         _id:newUser._id,
         username:newUser.username,
         email:newUser.email,
+        profilePic:newUser.profilePic,
+        bio:newUser.bio,
       },
     });
   } catch (e) {

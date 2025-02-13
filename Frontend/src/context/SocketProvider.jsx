@@ -17,7 +17,7 @@ export const SocketProvider=({children})=>{
         if(currentUser){
             const socket=io(import.meta.env.VITE_BACKEND_URL,{
                 query:{
-                    userId:currentUser.user._id,
+                    userId:currentUser._id,
                 }
             });
             setsocket(socket);

@@ -11,6 +11,7 @@ import { GetAllUsers } from "./context/GetAllUsers";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UpdateProfile from "./components/UpdateProfile";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             )
           }
         ></Route>
+        <Route path="/updateProfile" element={<UpdateProfile/>}/>
         <Route
           path="/signin"
           element={currentUser ? <Navigate to="/" /> : <SignIn />}

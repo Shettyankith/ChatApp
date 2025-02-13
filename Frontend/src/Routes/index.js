@@ -16,6 +16,9 @@ const summaryAPI=({
     sendMessage:{
         url:`${backendUrl}/message/send/`,
     },
+    updateProfile:{
+        url:`${backendUrl}/user/updateProfile/`,
+    },
 })
 
 export default summaryAPI;

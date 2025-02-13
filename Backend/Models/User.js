@@ -13,6 +13,15 @@ const UserSchema=mongoose.Schema({
     password:{
         type:String,
         require:true,
+    },
+    profilePic:{
+        type: String,
+        default: "",
+    },
+    bio:{
+        type: String,
+        maxlength: 100,
+        default: "",
     }
 },{
     timestamps:true,

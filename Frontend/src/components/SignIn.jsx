@@ -37,9 +37,9 @@ function SignIn() {
       .then((res) => {
         if (res.data.success) {
           // set the local storage
-          localStorage.setItem("token", JSON.stringify(res.data));
+          localStorage.setItem("token", JSON.stringify(res.data.user));
           // store the user detail in context for golbal use
-          setcurrentUser(res.data);
+          setcurrentUser(res.data.user);
           toast.success("Hey there! We missed you. 🥰");
         } else {
           toast.error(res.data.message);
@@ -85,7 +85,7 @@ function SignIn() {
             />
           </div>
           {errors.email && (
-            <span className="text-red-400">This field is required</span>
+            <span className="text-red-400">⚠ This field is required</span>
           )}
 
           {/*Password */}
@@ -109,7 +109,7 @@ function SignIn() {
             ></i>
           </div>
           {errors.password && (
-            <span className="text-red-400">This field is required</span>
+            <span className="text-red-400">⚠ This field is required</span>
           )}
           <button
             type="submit"
