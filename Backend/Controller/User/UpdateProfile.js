@@ -24,7 +24,7 @@ const UpdateProfile=async(req,res)=>{
             userId,
             {profilePic,username,bio},
             { new: true, runValidators: true },
-        );
+        ).select("-password");
         return res.status(201).json({
             success:true,
             error:false,

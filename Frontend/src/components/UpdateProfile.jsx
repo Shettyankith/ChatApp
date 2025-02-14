@@ -3,20 +3,53 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAuth } from "../context/AuthProvider.jsx";
 import { toast } from "react-toastify";
+import ImageConverter from "../context/ImageConverter.jsx"
+import summaryAPI from '../Routes/index.js';
 
 function UpdateProfile() {
     // use context for global state
     const { currentUser, setcurrentUser } = useAuth();
-    console.log(currentUser)
     const {
         register,
-        handleSubmit,
+        handleSubmit,           
         formState: { errors },
     } = useForm();
 
     const onSubmit = async (data) => {
-        console.log(data);
+        try {
+            // ✅ Convert image to base64
+            data.profilePic = await ImageConverter(data.profilePic[0]);
+    
+            console.log("Payload is:", data);
+    
+            // ✅ Create FormData to send image & text data properly
+            // const formData = new FormData();
+            // formData.append("username", data.username);
+            // formData.append("bio", data.bio);
+            // formData.append("profilePic", data.profilePic);
+    
+            // ✅ Correct axios request format
+            const response = await axios.post(
+                "/api/user/updateProfile", // ✅ Correct API URL
+                data, 
+                {
+                    headers: { "Content-Type": "multipart/form-data" }, // ✅ Ensure correct headers
+                    validateStatus: (status) => status < 500, // ✅ Correctly placed
+                }
+            );
+    
+            console.log("From updateProfile:", response);
+    
+            if (response.data.success) {
+                console.log("Profile Updated Successfully!", response);
+            } else {
+                console.log("Error Updating Profile:", response.data);
+            }
+        } catch (e) {
+            console.log("Error in Profile Update:", e);
+        }
     };
+    
 
     return (
         <div className="flex lg:flex-row flex-col-reverse justify-center items-center min-h-screen bg-[#1d1923] py-10 text-white">
@@ -45,7 +78,7 @@ function UpdateProfile() {
                             type="text"
                             name="username"
                             id="username"
-                            value={currentUser.user.username}
+                            defaultValue={currentUser.username}
                             placeholder="Choose a unique username"
                             className="bg-[#1d232a] outline-none w-full bg-[transparent]"
                             {...register("username", { required: true })}
@@ -59,6 +92,7 @@ function UpdateProfile() {
                         <textarea
                             name="bio"
                             id="bio"
+                            defaultValue={currentUser.bio}
                             className="bg-[#1d232a] outline-none grow"
                             placeholder="Tell us a little about yourself..."
                             {...register("bio", { required: true })}
@@ -69,9 +103,10 @@ function UpdateProfile() {
                     {/* Button */}
                     <div className='flex space-x-4 w-full lg:w-full md:w-[80%] justify-between items-center'>
                     <button
+                    type='reset'
                             className="w-1/2  border-[#ad6af9] text-[#ad6af9] font-bold py-2 rounded-lg hover:bg-[#1d232a] hover:text-[#ad6af9] border-2"
                         >
-                            Skip
+                            Reset
                         </button>
                         <button
                             type="submit"
