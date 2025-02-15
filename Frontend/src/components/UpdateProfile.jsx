@@ -5,51 +5,54 @@ import { useAuth } from "../context/AuthProvider.jsx";
 import { toast } from "react-toastify";
 import ImageConverter from "../context/ImageConverter.jsx"
 import summaryAPI from '../Routes/index.js';
+import { useNavigate } from 'react-router-dom';
 
 function UpdateProfile() {
+    const navigate = useNavigate();
     // use context for global state
     const { currentUser, setcurrentUser } = useAuth();
     const {
         register,
-        handleSubmit,           
+        handleSubmit,
         formState: { errors },
     } = useForm();
 
     const onSubmit = async (data) => {
         try {
-            // ✅ Convert image to base64
-            data.profilePic = await ImageConverter(data.profilePic[0]);
-    
-            console.log("Payload is:", data);
-    
-            // ✅ Create FormData to send image & text data properly
-            // const formData = new FormData();
-            // formData.append("username", data.username);
-            // formData.append("bio", data.bio);
-            // formData.append("profilePic", data.profilePic);
-    
-            // ✅ Correct axios request format
+            // Converting image to base64
+            if (data.profilePic[0]) {
+                data.profilePic = await ImageConverter(data.profilePic[0]);
+            } else {
+                delete data.profilePic;
+            }
+
+            // console.log("Payload is:", data);
+
+            // API request
             const response = await axios.post(
-                "/api/user/updateProfile", // ✅ Correct API URL
-                data, 
+                "/api/user/updateProfile",
+                data,
                 {
-                    headers: { "Content-Type": "multipart/form-data" }, // ✅ Ensure correct headers
-                    validateStatus: (status) => status < 500, // ✅ Correctly placed
+                    headers: { "Content-Type": "application/json" },
+                    validateStatus: (status) => status < 500,
                 }
             );
-    
-            console.log("From updateProfile:", response);
-    
+
+
             if (response.data.success) {
-                console.log("Profile Updated Successfully!", response);
+                toast.success("Boom! Profile leveled up! 🚀");
+                setcurrentUser(response.data.data);
+                localStorage.setItem("token", JSON.stringify(response.data.data));
+                navigate("/")
             } else {
-                console.log("Error Updating Profile:", response.data);
+                toast.error("Whoops! Let's try that again! 🔄");
             }
         } catch (e) {
+            toast.error("Technical hiccup! 🛠 Give it another shot!");
             console.log("Error in Profile Update:", e);
         }
     };
-    
+
 
     return (
         <div className="flex lg:flex-row flex-col-reverse justify-center items-center min-h-screen bg-[#1d1923] py-10 text-white">
@@ -63,14 +66,30 @@ function UpdateProfile() {
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     {/* Profile Pic Upload */}
-                    <div
-                        className="border-2 text-[#ad6af9] border-[#ad6af9] p-5 rounded-full overflow-hidden h-20 w-20 mx-auto flex justify-center items-center cursor-pointer hover:bg-[#ad6af9] hover:text-white transition-all duration-300"
-                        onClick={() => document.getElementById("profilePic").click()}
-                    >
-                        <i className="fa-solid fa-camera"></i>
-                        <input type="file" name="profilePic" id="profilePic" className="hidden" {...register("profilePic")} />
-                    </div>
-                    <p className="text-sm text-gray-400 text-center">Click to upload your profile picture</p>
+                    {currentUser.profilePic ? (
+                        <div
+                            className="border-2 text-[#ad6af9] border-[#ad6af9] rounded-full overflow-hidden h-20 w-20 mx-auto relative cursor-pointer hover:bg-[#ad6af9] hover:text-white transition-all duration-300"
+                            onClick={() => document.getElementById("profilePic").click()}
+                        >
+                            <img
+                                src={currentUser.profilePic}
+                                alt="profilePic"
+                                className="absolute inset-0 w-full h-full object-cover"
+                            />
+                            <input type="file" name="profilePic" id="profilePic" className="hidden" {...register("profilePic")} />
+                        </div>
+                    ) : (
+                        <div
+                            className="border-2 text-[#ad6af9] border-[#ad6af9] p-5 rounded-full overflow-hidden h-20 w-20 mx-auto flex justify-center items-center cursor-pointer hover:bg-[#ad6af9] hover:text-white transition-all duration-300"
+                            onClick={() => document.getElementById("profilePic").click()}
+                        >
+                            <i className="fa-solid fa-camera"></i>
+                            <input type="file" name="profilePic" id="profilePic" className="hidden" {...register("profilePic")} />
+                        </div>
+                    )}
+
+
+                    <p className="text-sm text-gray-400 text-center">{currentUser.profilePic?"Click to change your profile picture":"Click to upload your profile picture "}</p>
 
                     {/* Username Field */}
                     <div className="w-full md:w-[80%] lg:w-full space-x-4 text-md border-2 rounded-md p-2 border-gray-600">
@@ -102,8 +121,8 @@ function UpdateProfile() {
 
                     {/* Button */}
                     <div className='flex space-x-4 w-full lg:w-full md:w-[80%] justify-between items-center'>
-                    <button
-                    type='reset'
+                        <button
+                            type='reset'
                             className="w-1/2  border-[#ad6af9] text-[#ad6af9] font-bold py-2 rounded-lg hover:bg-[#1d232a] hover:text-[#ad6af9] border-2"
                         >
                             Reset

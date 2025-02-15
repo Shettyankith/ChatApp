@@ -26,6 +26,10 @@ function Left() {
     }
   };
 
+  const updateProfile=()=>{
+    navigate("/updateProfile")
+  }
+
   return (
     <div className="w-[30%] bg-[#1D1923] text-white shrink-0">
       <div className="flex px-10 py-2 space-x-4 w-[100%]">
@@ -38,6 +42,11 @@ function Left() {
         <i
           className="fa-solid align-self-end fa-arrow-right-from-bracket py-3 px-3 hover:bg-[#ad6af9] transition-all duration-300 rounded-full "
           onClick={()=>logout()}
+        ></i>
+         {/* edit button */}
+         <i
+          className="fa-solid align-self-end fa-user-pen py-3 px-3 bg-[#ad6af9] hover:text-[#ad6af9] hover:bg-[transparent] transition-all duration-300 rounded-full "
+          onClick={()=>updateProfile()}
         ></i>
       </div>
       <Search />
