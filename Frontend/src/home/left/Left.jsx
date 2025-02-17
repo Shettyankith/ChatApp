@@ -10,8 +10,7 @@ import { useAuth } from "../../context/AuthProvider";
 function Left() {
   const { setcurrentUser } = useAuth();
   // Logout function
-  const navigate = useNavigate(); // ✅ Use the hook inside the component
-
+  const navigate = useNavigate(); 
   const logout = async () => {
     try {
       const response = await axios.get("/api/user/signout");
