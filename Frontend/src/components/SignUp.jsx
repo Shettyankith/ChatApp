@@ -6,9 +6,11 @@ import summaryAPI from "../Routes";
 import { useAuth } from "../context/AuthProvider.jsx";
 import {Link} from "react-router-dom"
 import {toast} from "react-toastify"
+import { useNavigate } from "react-router-dom";
 
 
 function SignUp() {
+  const navigate=useNavigate();
   // use context for gobal use 
   const {currentUser,setcurrentUser}=useAuth();
   // console.log("From AuthContext--->",currentUser)
@@ -52,7 +54,8 @@ function SignUp() {
           localStorage.setItem("token", JSON.stringify(res.data.user));
           // store the user detail in context for golbal use
           setcurrentUser(res.data.user);
-          toast.success("You're officially part of the squad!🤝")
+          toast.success("You're officially part of the squad!🤝");
+          navigate("/updateProfile");
         } else {
           toast.error(res.data.message);
         }
