@@ -6,8 +6,10 @@ import axios from "axios";
 import { useAuth } from "../context/AuthProvider.jsx";
 import {Link} from "react-router-dom"
 import {toast} from "react-toastify"
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
+  const navigate=useNavigate();
   // use context for gobal use
   const { currentUser, setcurrentUser } = useAuth();
   // form validation using react hook form
@@ -56,6 +58,17 @@ function SignIn() {
         }
       });
   };
+
+  const ForgotPassword=async()=>{
+    console.log("Forgot password clicked");
+      try{
+        const response=axios.get("/api/user/forgot-password");
+        console.log(response);
+      }catch(e){
+
+      }
+      // navigate("/forgot-password");
+  }
 
   return (
     <div className="flex lg:flex-row flex-col-reverse justify-center items-center min-h-screen bg-[#1d1923] py-10 text-white">
@@ -120,7 +133,7 @@ function SignIn() {
         </form>
 
         <a
-          href="/forgot-password"
+          onClick={ForgotPassword()}
           className="hover:underline hover:text-[#ad6af9] text-center block"
         >
           Forgot Password?

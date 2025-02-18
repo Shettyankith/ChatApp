@@ -1,4 +1,4 @@
-import SendEmail from "../../Middleware/SendEmail";
+import SendEmail from "../../Middleware/SendEmail.js";
 import setResetCode from "../../jwt/setResetCode.js"
 
 const ForgotPassword=async(requestAnimationFrame,res)=>{

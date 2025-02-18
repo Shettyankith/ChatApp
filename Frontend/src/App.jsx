@@ -12,6 +12,7 @@ import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UpdateProfile from "./components/UpdateProfile";
+import ForgotPassword from "../../Backend/Controller/User/Forgotpassword";
 
 
 function App() {
@@ -41,6 +42,10 @@ function App() {
         <Route
           path="/signin"
           element={currentUser ? <Navigate to="/" /> : <SignIn />}
+        ></Route>
+         <Route
+          path="/forgot-password"
+          element={<ForgotPassword/>}
         ></Route>
         <Route
           path="/signup"

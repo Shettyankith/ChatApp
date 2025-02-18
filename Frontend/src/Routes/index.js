@@ -19,6 +19,9 @@ const summaryAPI=({
     updateProfile:{
         url:`${backendUrl}/user/updateProfile/`,
     },
+    forgotPassword:{
+        url:`${backendUrl}/user/forgot-password/`,
+    },
 })
 
 export default summaryAPI;
