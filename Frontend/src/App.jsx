@@ -12,7 +12,7 @@ import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UpdateProfile from "./components/UpdateProfile";
-import ForgotPassword from "../../Backend/Controller/User/Forgotpassword";
+import ForgotPassword from "./components/ForgotPassword"
 
 
 function App() {

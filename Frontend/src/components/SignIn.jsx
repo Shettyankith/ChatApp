@@ -65,9 +65,9 @@ function SignIn() {
         const response=axios.get("/api/user/forgot-password");
         console.log(response);
       }catch(e){
-
+        console.log(e);
       }
-      // navigate("/forgot-password");
+      navigate("/forgot-password");
   }
 
   return (
